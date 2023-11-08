@@ -9,39 +9,85 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
 
-        #game-container {
+        .game-container {
             text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 300px;
         }
     </style>
 </head>
 
 <body>
-    <div id="game-container">
-        <h1>Welcome to the Ultimate Game Play Website!</h1>
-        <p>Click the button to play the game:</p>
-        <button id="play-button">Play Game</button>
-        <div id="game-result"></div>
-
-        <script>
-            document.getElementById('play-button').addEventListener('click', function () {
-                var randomNumber = Math.floor(Math.random() * 2); // Generate random number (0 or 1)
-                var userChoice = prompt('Enter 0 for Heads or 1 for Tails:');
-                if (userChoice === null) {
-                    // Handle cancel button click
-                    return;
-                }
-                userChoice = parseInt(userChoice);
-                var result = (userChoice === randomNumber) ? 'You win!' : 'You lose!';
-                document.getElementById('game-result').innerText = 'Result: ' + result;
-            });
-        </script>
+    <div class="game-container">
+        <h2>Guess the Number</h2>
+        <button onclick="guessNumber()">Play</button>
+        <p id="guess-output"></p>
     </div>
+
+    <div class="game-container">
+        <h2>Rock Paper Scissors</h2>
+        <button onclick="playRPS()">Play</button>
+        <p id="rps-output"></p>
+    </div>
+
+    <div class="game-container">
+        <h2>Coin Flip</h2>
+        <button onclick="flipCoin()">Flip</button>
+        <p id="coin-output"></p>
+    </div>
+
+    <script>
+        function guessNumber() {
+            var numberToGuess = Math.floor(Math.random() * 100) + 1;
+            var userGuess = prompt("Guess a number between 1 and 100:");
+            if (userGuess === null) {
+                return;
+            }
+            userGuess = parseInt(userGuess);
+            if (userGuess === numberToGuess) {
+                document.getElementById("guess-output").innerText = "Congratulations! You guessed the correct number.";
+            } else {
+                document.getElementById("guess-output").innerText = "Sorry, the correct number was " + numberToGuess + ".";
+            }
+        }
+
+        function playRPS() {
+            var choices = ["Rock", "Paper", "Scissors"];
+            var userChoice = prompt("Enter Rock, Paper, or Scissors:").toLowerCase();
+            if (userChoice === null) {
+                return;
+            }
+            var computerChoice = choices[Math.floor(Math.random() * 3)];
+            var result;
+            if (userChoice === computerChoice.toLowerCase()) {
+                result = "It's a draw!";
+            } else if ((userChoice === "rock" && computerChoice === "scissors") ||
+                (userChoice === "paper" && computerChoice === "rock") ||
+                (userChoice === "scissors" && computerChoice === "paper")) {
+                result = "You win!";
+            } else {
+                result = "You lose!";
+            }
+            document.getElementById("rps-output").innerText = "Computer chose: " + computerChoice + ". " + result;
+        }
+
+        function flipCoin() {
+            var randomNumber = Math.floor(Math.random() * 2);
+            var result = (randomNumber === 0) ? "Heads" : "Tails";
+            document.getElementById("coin-output").innerText = "Result: " + result;
+        }
+    </script>
 </body>
 
-</html>
+    </html>
+    
