@@ -4,90 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Game Play Website</title>
+    <title>Google Clone</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
+            background-color: #f2f2f2;
         }
 
-        .game-container {
-            text-align: center;
-            margin: 20px;
-            padding: 20px;
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 10px;
+            border-radius: 5px;
             width: 300px;
+        }
+
+        .search-button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <div class="game-container">
-        <h2>Guess the Number</h2>
-        <button onclick="guessNumber()">Play</button>
-        <p id="guess-output"></p>
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-box" placeholder="Search...">
+        <button id="search-button" class="search-button">Google Search</button>
     </div>
 
-    <div class="game-container">
-        <h2>Rock Paper Scissors</h2>
-        <button onclick="playRPS()">Play</button>
-        <p id="rps-output"></p>
-    </div>
-
-    <div class="game-container">
-        <h2>Coin Flip</h2>
-        <button onclick="flipCoin()">Flip</button>
-        <p id="coin-output"></p>
-    </div>
+    <div id="search-results"></div>
 
     <script>
-        function guessNumber() {
-            var numberToGuess = Math.floor(Math.random() * 100) + 1;
-            var userGuess = prompt("Guess a number between 1 and 100:");
-            if (userGuess === null) {
-                return;
-            }
-            userGuess = parseInt(userGuess);
-            if (userGuess === numberToGuess) {
-                document.getElementById("guess-output").innerText = "Congratulations! You guessed the correct number.";
-            } else {
-                document.getElementById("guess-output").innerText = "Sorry, the correct number was " + numberToGuess + ".";
-            }
-        }
+        document.getElementById('search-button').addEventListener('click', function () {
+            var searchTerm = document.getElementById('search-input').value;
+            var searchResults = document.getElementById('search-results');
+            searchResults.innerHTML = '';
 
-        function playRPS() {
-            var choices = ["Rock", "Paper", "Scissors"];
-            var userChoice = prompt("Enter Rock, Paper, or Scissors:").toLowerCase();
-            if (userChoice === null) {
-                return;
-            }
-            var computerChoice = choices[Math.floor(Math.random() * 3)];
-            var result;
-            if (userChoice === computerChoice.toLowerCase()) {
-                result = "It's a draw!";
-            } else if ((userChoice === "rock" && computerChoice === "scissors") ||
-                (userChoice === "paper" && computerChoice === "rock") ||
-                (userChoice === "scissors" && computerChoice === "paper")) {
-                result = "You win!";
+            if (searchTerm.trim() === '') {
+                searchResults.innerHTML = 'Please enter a search term.';
             } else {
-                result = "You lose!";
+                var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm);
+                var searchLink = document.createElement('a');
+                searchLink.href = searchUrl;
+                searchLink.target = '_blank';
+                searchLink.innerText = 'View search results for ' + searchTerm;
+                searchResults.appendChild(searchLink);
             }
-            document.getElementById("rps-output").innerText = "Computer chose: " + computerChoice + ". " + result;
-        }
-
-        function flipCoin() {
-            var randomNumber = Math.floor(Math.random() * 2);
-            var result = (randomNumber === 0) ? "Heads" : "Tails";
-            document.getElementById("coin-output").innerText = "Result: " + result;
-        }
+        });
     </script>
 </body>
 
-    </html>
-    
+</html>
