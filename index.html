@@ -4,87 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Affiliate</title>
+    <title>Ultimate Game Play Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
         }
 
-        .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-group input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-group input[type="submit"]:hover {
-            background-color: #45a049;
+        #game-container {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <img class="logo" src="ECHO .jpg" alt="ECHO Logo">
-        <form action="https://formsubmit.co/younusyounus3090@gmail.com" method="post">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_autoresponse" value="ECHO">
-            <input type="hidden" name="_next" value="https://https://younus1244.github.io/thank you.html">
-            <input type="hidden" name="_template" value="table">
-            <div class="form-group">
-                <label for="affiliateName">Affiliate Name:</label>
-                <input type="text" id="affiliateName" name="affiliateName" required>
-            </div>
-            <div class="form-group">
-                <label for="affiliateEmail">Affiliate Email:</label>
-                <input type="text" id="affiliateEmail" name="affiliateEmail" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit">
-            </div>
-        </form>
+    <div id="game-container">
+        <h1>Welcome to the Ultimate Game Play Website!</h1>
+        <p>Click the button to play the game:</p>
+        <button id="play-button">Play Game</button>
+        <div id="game-result"></div>
+
+        <script>
+            document.getElementById('play-button').addEventListener('click', function () {
+                var randomNumber = Math.floor(Math.random() * 2); // Generate random number (0 or 1)
+                var userChoice = prompt('Enter 0 for Heads or 1 for Tails:');
+                if (userChoice === null) {
+                    // Handle cancel button click
+                    return;
+                }
+                userChoice = parseInt(userChoice);
+                var result = (userChoice === randomNumber) ? 'You win!' : 'You lose!';
+                document.getElementById('game-result').innerText = 'Result: ' + result;
+            });
+        </script>
     </div>
-    <footer>
-        <h4>>powered by ECHO</h4>
-    </footer>
 </body>
 
 </html>
